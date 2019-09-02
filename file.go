@@ -25,3 +25,11 @@ func Exists(path string) bool {
 	}
 	return true
 }
+
+func GetFileSize(filename string) int64 {
+	fi, err := os.Stat(filename)
+	if err != nil {
+		return -1
+	}
+	return fi.Size()
+}

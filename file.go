@@ -33,3 +33,15 @@ func GetFileSize(filename string) int64 {
 	}
 	return fi.Size()
 }
+
+func DeleteFile(path string) error {
+	f, err := os.Stat(path)
+	if err != nil {
+		return err
+	}
+
+	if !f.IsDir() {
+		return os.Remove(path)
+	}
+	return nil
+}

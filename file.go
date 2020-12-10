@@ -2,6 +2,8 @@ package goutil
 
 import (
 	"fmt"
+	"io"
+	"io/ioutil"
 	"os"
 )
 
@@ -15,7 +17,7 @@ func WriteFileAppend(filename string, fileBytes []byte) error {
 	return err
 }
 
-func Exists(path string) bool {
+func FileExists(path string) bool {
 	_, err := os.Stat(path)
 	if err != nil {
 		if os.IsExist(err) {
@@ -44,4 +46,35 @@ func DeleteFile(path string) error {
 		return os.Remove(path)
 	}
 	return nil
+}
+
+func IsDir(path string) bool {
+	s, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return s.IsDir()
+}
+
+func IsPathEmpty(name string) bool {
+	f, err := os.Open(name)
+	if err != nil {
+		return false
+	}
+	defer f.Close()
+
+	_, err = f.Readdirnames(1)
+	if err == io.EOF {
+		return true
+	}
+	return false
+}
+
+//计算文件MD5值
+func MD5File(file string) (string, error) {
+	data, err := ioutil.ReadFile(file)
+	if err != nil {
+		return "", err
+	}
+	return MD5Bytes(data), nil
 }

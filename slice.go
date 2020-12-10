@@ -34,7 +34,7 @@ func UniqueSliceString(s []string, caseSensitive bool) []string {
 	return result
 }
 
-func IndexOf(arr []string, str string) int {
+func StringsIndexOf(arr []string, str string) int {
 	for i, v := range arr {
 		if v == str {
 			return i

@@ -8,17 +8,17 @@ import (
 	"fmt"
 )
 
-func Sub(str string, from int, to int) string {
+func StringSub(str string, from int, to int) string {
 	array := []rune(str)
 	return string(array[from:to])
 }
 
-func SubFrom(str string, from int) string {
+func StringSubFrom(str string, from int) string {
 	array := []rune(str)
 	return string(array[from:])
 }
 
-func SubTo(str string, to int) string {
+func StringSubTo(str string, to int) string {
 	array := []rune(str)
 	return string(array[0:to])
 }

@@ -6,11 +6,26 @@ import (
 	"crypto/sha1"
 	"encoding/hex"
 	"fmt"
+	"strings"
 )
 
 func StringSub(str string, from int, to int) string {
 	array := []rune(str)
 	return string(array[from:to])
+}
+
+func StringCut(str string, from string, to string) string {
+	i := strings.Index(str, from)
+	if i == -1 {
+		return ""
+	}
+
+	str = str[i+len(from):]
+	j := strings.Index(str, to)
+	if j == -1 {
+		return ""
+	}
+	return str[:j]
 }
 
 func StringSubFrom(str string, from int) string {
